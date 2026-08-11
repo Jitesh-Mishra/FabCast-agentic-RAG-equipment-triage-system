@@ -1,3 +1,4 @@
+import time
 import streamlit as st
 import os
 from dotenv import load_dotenv
@@ -155,6 +156,7 @@ with tab1:
                     onset = get_issue_onset(d, st.session_state.current_date.date())
                     config = {"configurable": {"thread_id": f"{d}__{st.session_state.current_date.date()}"}}
                     graph.invoke({"equipment_id": d}, config=config)
+                    time.sleep(2)  # brief pacing so a burst of flagged devices doesn't trip Groq's per-minute rate limit
                     st.session_state.pending_tickets[config["configurable"]["thread_id"]] = {
                         "device": d, "config": config,
                         "scan_date": st.session_state.current_date.date(),

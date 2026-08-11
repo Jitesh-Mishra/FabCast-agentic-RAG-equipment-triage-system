@@ -3,12 +3,29 @@ from langgraph.graph import StateGraph, END
 import sqlite3
 from langgraph.checkpoint.sqlite import SqliteSaver
 import os
+import time
 from langchain_groq import ChatGroq
+from groq import RateLimitError
 
 from src.monitor import score_latest
 from src.rag import retrieve
 
 llm = ChatGroq(model="openai/gpt-oss-20b", temperature=0.2, groq_api_key=os.environ.get("GROQ_API_KEY"))
+
+
+def call_llm_with_retry(prompt, max_retries=4, base_wait=20):
+    """Groq's free tier has a per-minute rate limit. If a burst of flagged
+    devices fires several LLM calls at once, wait and retry instead of
+    crashing the whole scan."""
+    for attempt in range(max_retries):
+        try:
+            return llm.invoke(prompt)
+        except RateLimitError:
+            if attempt == max_retries - 1:
+                raise
+            wait = base_wait * (attempt + 1)
+            print(f"[llm] Rate limited, waiting {wait}s before retry {attempt + 1}/{max_retries}...")
+            time.sleep(wait)
 
 
 class FabCastState(TypedDict):
@@ -52,7 +69,7 @@ Context:
 
 Write a 3-4 sentence diagnosis for a human reviewer."""
 
-    response = llm.invoke(prompt)
+    response = call_llm_with_retry(prompt)
     return {"diagnosis": response.content, "citations": [d.metadata["source"] for d in docs]}
 
 
@@ -69,7 +86,7 @@ LIKELY CAUSE: ...
 RECOMMENDED ACTION: ...
 CONFIDENCE: (state plainly whether this is a strong or weak signal)"""
 
-    response = llm.invoke(prompt)
+    response = call_llm_with_retry(prompt)
     return {"ticket_draft": response.content}
 
 
