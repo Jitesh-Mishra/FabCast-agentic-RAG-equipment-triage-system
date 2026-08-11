@@ -1,0 +1,13 @@
+[
+  {"question": "Why might metric4 suddenly become nonzero on a device?", "expected_topic": "metric4 as primary failure trigger"},
+  {"question": "Is metric1 a reliable signal for diagnosing equipment failure?", "expected_topic": "metric1 is noisy, low diagnostic value"},
+  {"question": "What's notable about metric2 rising over time?", "expected_topic": "metric2 elevation pattern"},
+  {"question": "Does metric3 help distinguish failing devices from healthy ones?", "expected_topic": "metric3 low diagnostic value"},
+  {"question": "What does metric5 typically indicate?", "expected_topic": "metric5 low diagnostic value / device age"},
+  {"question": "Is metric6 useful for spotting an acute problem today?", "expected_topic": "metric6 slow-moving counter, reflects age not acute health"},
+  {"question": "How should metric7 be weighted in a diagnosis?", "expected_topic": "metric7 secondary supporting signal"},
+  {"question": "Should metric7 and metric8 be treated as two independent confirming signals?", "expected_topic": "metric8 duplicate of metric7"},
+  {"question": "What does an elevated metric9 suggest?", "expected_topic": "metric9 moderate signal"},
+  {"question": "If a device shows no warning signs at all, is it guaranteed safe?", "expected_topic": "silent failure patterns, no guarantee"},
+  {"question": "Should a diagnosis state that failure is certain based on telemetry alone?", "expected_topic": "triage guidance, use risk language not certainty"}
+]

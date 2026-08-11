@@ -1,0 +1,123 @@
+[
+  {
+    "question": "Why might metric4 suddenly become nonzero on a device?",
+    "answer": "**Direct Answer:** Metric4 might suddenly become nonzero on a device because it transitions from 0 to a sustained nonzero value, which is an early warning sign of impending failure. This transition typically occurs 1-2 days before actual failure.\n\n**Supporting Reasoning:** According to the context in [metric4_overview.md], \"In confirmed failure cases, it transitions from 0 to a sustained nonzero value 1-2 days before failure.\"",
+    "sources": [
+      "metric4_overview.md",
+      "triage_general_guidance.md",
+      "metric4_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 0.8
+  },
+  {
+    "question": "Is metric1 a reliable signal for diagnosing equipment failure?",
+    "answer": "**Direct Answer:** No, metric1 has low diagnostic value and its values are noisy and high-variance regardless of device health state.\n\n**Supporting Reasoning:** According to the document \"metric1_overview.md\", historical analysis found no meaningful separation between failing and healthy devices on this channel, and values are noisy and high-variance regardless of device health state. Additionally, the guidance section advises not to use metric1 as a standalone trigger for inspection or a work order, suggesting that it is not considered reliable for diagnosing equipment failure.",
+    "sources": [
+      "metric1_overview.md",
+      "metric1_overview.md",
+      "metric7_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 0.95
+  },
+  {
+    "question": "What's notable about metric2 rising over time?",
+    "answer": "**Direct Answer:** A sustained rise in metric2 indicates elevated failure risk. This pattern is associated with the device moving into sustained-nonzero territory ahead of some failures.\n\n**Supporting Reasoning:** The context states that \"A sustained-nonzero pattern \u2014 metric2 staying above 0 across consecutive days rather than a single spike \u2014 is associated with elevated failure risk\" ([metric2_overview.md]). Additionally, analysis of confirmed failure cases shows that this channel moves into sustained-nonzero territory ahead of some (not all) failures.",
+    "sources": [
+      "metric2_overview.md",
+      "metric2_overview.md",
+      "metric9_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 0.8
+  },
+  {
+    "question": "Does metric3 help distinguish failing devices from healthy ones?",
+    "answer": "**1. Direct answer:** No, metric3 does not help distinguish failing devices from healthy ones.\n**2. Supporting reasoning:** According to the document \"metric3_overview.md\", it is stated that \"metric3 readings are nearly identical between devices that subsequently failed and devices that didn't\" (Source: metric3_overview.md). This suggests that metric3 does not provide a clear distinction between failing and healthy devices, which further supports the conclusion that it has low diagnostic value.",
+    "sources": [
+      "metric3_overview.md",
+      "metric5_overview.md",
+      "metric6_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 1.0
+  },
+  {
+    "question": "What does metric5 typically indicate?",
+    "answer": "**Direct Answer:** Metric 5 typically indicates the device's age or configuration history, rather than its current operating condition. It behaves as a slow-moving cumulative counter.\n\n**Supporting Reasoning:** This is stated in the \"Description\" section of the source document [metric5_overview.md], which says: \"It behaves as a slow-moving cumulative counter, more reflective of device age or configuration history than of current operating condition.\"",
+    "sources": [
+      "metric5_overview.md",
+      "metric5_overview.md",
+      "metric6_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 1.0
+  },
+  {
+    "question": "Is metric6 useful for spotting an acute problem today?",
+    "answer": "**Direct Answer:** No, metric6 has low diagnostic value and shows little separation between failing and healthy devices.\n\n**Supporting Reasoning:** According to the document [metric6_overview.md], \"metric6 shows the same pattern as metric3 and metric5: little to no separation between failing and healthy devices...\" This suggests that metric6 is not useful for spotting acute problems today, as it does not provide clear distinction between failing and healthy devices.",
+    "sources": [
+      "metric6_overview.md",
+      "metric7_overview.md",
+      "metric7_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 0.9
+  },
+  {
+    "question": "How should metric7 be weighted in a diagnosis?",
+    "answer": "**Direct Answer:** Metric7 should be treated as supporting evidence, not a standalone trigger for diagnosis. Its weight is secondary to other metrics.\n\n**Supporting Reasoning:** According to the guidance provided in [metric7_overview.md], \"Treat a metric7 nonzero reading as supporting evidence, not a standalone trigger.\" This suggests that while metric7 can provide valuable information, it should be considered in conjunction with other metrics rather than being relied upon alone for diagnosis.",
+    "sources": [
+      "metric7_overview.md",
+      "metric7_overview.md",
+      "metric8_overview.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 0.9
+  },
+  {
+    "question": "Should metric7 and metric8 be treated as two independent confirming signals?",
+    "answer": "**Direct Answer:** No, they should not be treated as two independent confirming signals. They are likely the same underlying signal reported twice.\n\n**Supporting Reasoning:** The guidance in [metric8_overview.md] explicitly states \"Do not treat metric7 and metric8 moving together as two independent confirming signals \u2014 they're very likely the same underlying signal reported twice.\"",
+    "sources": [
+      "metric8_overview.md",
+      "metric7_overview.md",
+      "metric8_overview.md"
+    ],
+    "faithfulness": 1.0,
+    "relevancy": 0.9
+  },
+  {
+    "question": "What does an elevated metric9 suggest?",
+    "answer": "**Direct Answer:** An elevated metric9 suggests a moderate increase in failure risk, but not as strong of a correlation as metric4. \n\n**Supporting Reasoning:** According to the document \"metric9_overview.md\", it states that \"Its correlation with failure is moderate \u2014 stronger than metric2 or metric7 individually would suggest as a standalone rule, but not close to metric4's hit rate.\" This suggests that an elevated metric9 reading indicates a moderate increase in failure risk.",
+    "sources": [
+      "metric9_overview.md",
+      "metric9_overview.md",
+      "metric7_overview.md"
+    ],
+    "faithfulness": 0.7,
+    "relevancy": 0.8
+  },
+  {
+    "question": "If a device shows no warning signs at all, is it guaranteed safe?",
+    "answer": "**1) Direct answer:** No, a device showing no warning signs does not guarantee its safety.\n\n**2) Supporting reasoning:** According to silent_failure_patterns.md, \"a clean dashboard (all metrics flat, no flags raised) is not confirmation that a device is healthy. It means telemetry hasn't detected a problem \u2014 which is a different, weaker claim.\"",
+    "sources": [
+      "silent_failure_patterns.md",
+      "triage_general_guidance.md",
+      "silent_failure_patterns.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 1.0
+  },
+  {
+    "question": "Should a diagnosis state that failure is certain based on telemetry alone?",
+    "answer": "**1. Direct answer:** No, a diagnosis should not state that failure is certain based on telemetry alone.\n\n**2. Supporting reasoning:** According to the triage general guidance document [triage_general_guidance.md], \"Don't state failure as certain based on telemetry alone, even when metric4 has triggered.\"",
+    "sources": [
+      "triage_general_guidance.md",
+      "silent_failure_patterns.md",
+      "silent_failure_patterns.md"
+    ],
+    "faithfulness": 0.9,
+    "relevancy": 1.0
+  }
+]

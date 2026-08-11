@@ -1,0 +1,17 @@
+[
+  {
+    "version": "v1",
+    "avg_faithfulness": 0.9045454545454544,
+    "avg_relevancy": 0.8590909090909092
+  },
+  {
+    "version": "v2",
+    "avg_faithfulness": 0.9045454545454544,
+    "avg_relevancy": 0.8545454545454546
+  },
+  {
+    "version": "v2",
+    "avg_faithfulness": 0.890909090909091,
+    "avg_relevancy": 0.9136363636363637
+  }
+]
